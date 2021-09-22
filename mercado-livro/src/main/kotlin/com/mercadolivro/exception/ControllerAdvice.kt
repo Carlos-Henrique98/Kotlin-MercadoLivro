@@ -49,6 +49,20 @@ class ControllerAdvice {
             ex.bindingResult.fieldErrors.map { FieldErrorResponse(it.defaultMessage ?: "invalid", it.field) }
         )
         return ResponseEntity(erro, HttpStatus.BAD_REQUEST)
-
     }
+
+    @ExceptionHandler(AccessDeniedException::class)
+    fun handleAccessDeniedException(
+        ex: AccessDeniedException,
+        request: WebRequest
+    ): ResponseEntity<ErrorResponse> {
+        val erro = ErrorResponse(
+            HttpStatus.FORBIDDEN.value(),
+            Errors.ML000.message,
+            Errors.ML000.code,
+            null
+        )
+        return ResponseEntity(erro, HttpStatus.BAD_REQUEST)
+    }
+
 }
