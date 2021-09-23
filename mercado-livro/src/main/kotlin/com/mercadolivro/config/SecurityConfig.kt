@@ -35,7 +35,7 @@ class SecurityConfig(
     private val PUBLIC_MATCHERS = arrayOf<String>()
 
     private val PUBLIC_POST_MATCHERS = arrayOf(
-        "/customer"
+        "/customers"
     )
 
     private val ADMIN_MATCHERS = arrayOf(
