@@ -18,7 +18,7 @@ class CustomerService(
 
     fun getAll(name: String?): List<CustomerModel> {
         name?.let {
-            return customerRepository.findByNameContaining(name)
+            return customerRepository.findByNameContaining(it)
         }
         return customerRepository.findAll().toList()
     }
@@ -38,7 +38,7 @@ class CustomerService(
 
     fun update(customer: CustomerModel) {
         if (!customerRepository.existsById(customer.id!!)) {
-            throw Exception()
+            throw NotFoundException(Errors.ML201.message.format(customer.id), Errors.ML201.code)
         }
         customerRepository.save(customer)
     }
